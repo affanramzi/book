@@ -3,6 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResource;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +28,10 @@ Route::group(['prefix' => 'auth', 'middleware' => 'auth:sanctum'], function() {
     Route::post('logoutall', 'AuthController@logoutall');
 });
 
+Route::get('/users', function () {
+    return new UserCollection(User::all());
+});
+
+Route::get('/users', function () {
+    return UserResource::collection(User::all());
+});
