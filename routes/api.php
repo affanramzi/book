@@ -14,6 +14,9 @@ use App\Http\Controllers\AuthController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
 Route::post('login', 'AuthController@login');
 Route::group(['prefix' => 'auth', 'middleware' => 'auth:sanctum'], function() {
     // manggil controller sesuai bawaan laravel 8
@@ -21,6 +24,4 @@ Route::group(['prefix' => 'auth', 'middleware' => 'auth:sanctum'], function() {
     // manggil controller dengan mengubah namespace di RouteServiceProvider.php biar bisa kayak versi2 sebelumnya
     Route::post('logoutall', 'AuthController@logoutall');
 });
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+
